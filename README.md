@@ -1,77 +1,124 @@
+# 🏃‍♂️ CartoRun — Plateforme de Gestion de Raids Sportifs
 
-# Laravel skeleton 
+Une application web Full-Stack MVC moderne conçue pour centraliser l'organisation de raids sportifs, la gestion des clubs et le suivi des inscriptions.
 
-This repository has three protected branches.
-- main is the initial state of the project. You cannot push to it or delete it.
-- dev is the staging branch. Please merge your work here to ensure the web server is never updated with wrong code. You cannot delete it.
-- stable is the default branch and the release branch. Each update here is automatically forwarded to the web server.
- - composer install is run if composer.json is updated
- - npm install is run if package.json is updated
- - .env.prod is converted to .env, an application key is generated
- - npm run build is called to produce public assets (css++)
- - database is migrated
- - /!\ You can add new steps to .gitlab-ci.yml if necessary
-- initially, the three branches are synchronized. (same content)
+---
 
-Skeleton deploys three branches:
-- / : welcome, the standard Laravel welcome screen
-- /logs/<file> : a page to view access.log, error.log and laravel.log (the last one can be deleted for better reliability)
- -> /logs/access /log/error /log/laravel
+## 🎯 Le projet en bref
 
-To begin:
-- clone the repository
- - copy laravel/.env.example to laravel/.env
- - tweak it at will
- - setup your database
-  - default is sqlite
-  - you can switch to mysql is prefered
-  - run the migrations (=> php artisan migrate)
- - never, ever, commit .env to the repository. It contains personal/machine specific informations.
+CartoRun résout la complexité de l'organisation d'événements sportifs multi-courses en proposant une plateforme unifiée où interagissent plusieurs types d'acteurs (organisateurs, clubs, participants).
 
-To start working:
-- checkout dev branch
-- create your work branch
- - create or modify files
- - commit files (repeat as long as needed)
- - push
-- merge with dev
- - checkout dev
- - pull the latest version
- - merge you branch into dev
- - test & fix if necessary
- - push back to dev
-- merge with stable
- - You can do a merge request from the gitlab GUI, but it's not enforced in 2A
- - You can checkout stable, merge dev into stable and push back
-- test the web application
-- start again with a new feature (clone is not necessary, of course!)
+**Challenge relevé en équipe :**
+- ✅ Architecture MVC robuste et modélisation de base de données complexe
+- ✅ Système complet de gestion multi-rôles sécurisé
+- ✅ Module d'importation automatisé pour les données massives
+- ✅ Collaboration agile au sein d'une équipe de développement de 8 personnes
 
+---
 
-## Getting started
+## 🚀 Fonctionnalités Clés
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### 👥 Système Multi-Rôles & Sécurité
 
-## Add your files
+| Rôle | Responsabilités |
+|------|----------------|
+| **Administrateurs** | Supervision globale de la plateforme, validation des comptes et maintenance |
+| **Responsables de Raids** | Création d'événements, configuration des courses, gestion des tracés et des difficultés |
+| **Responsables de Clubs** | Gestion de leur structure, inscription groupée de coureurs et suivi administratif |
+| **Coureurs** | Espace personnel, consultation des raids disponibles, inscription et accès aux résultats |
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+### 📊 Automatisation & Traitement de Données
 
-```
-cd existing_repo
-git remote add origin https://git.unicaen.fr/iut-gon-info/sae3-2025/groupetest.git
-git branch -M main
-git push -uf origin main
+- **Importation CSV automatisée :** Module d'intégration de fichiers externes pour automatiser le chargement massif de coureurs, de membres de clubs ou de grilles de résultats sans saisie manuelle.
+- **Modélisation BD Relationnelle :** Base de données MySQL optimisée avec contraintes d'intégrité, indexations et clés étrangères pour garantir la fiabilité des inscriptions et éviter les doublons de courses.
+
+### 📐 Gestion de Projet
+
+- Développement mené en **Méthode Agile** (répartition des tâches, sprints logiciels)
+- Gestion des branches Git stricte (`main`, `dev`, `stable`) avec intégration continue
+
+---
+
+## 🏗️ Architecture du Projet
+
+Le projet respecte l'architecture standard de **Laravel (MVC)** pour isoler proprement la logique métier, les accès aux données et les interfaces graphiques :
+
+```text
+src/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/   # Logique de contrôle (RaidController, InscriptionController...)
+│   │   └── Middleware/    # Filtres de sécurité et gestion des rôles (Admin, ClubResponsable...)
+│   └── Models/            # Modèles Eloquent (Raid, Club, Coureur, Equipe...)
+├── database/
+│   ├── migrations/        # Historique et structure de la base de données SQL
+│   └── seeders/           # Données de test pour les démonstrations et soutenances
+├── resources/
+│   └── views/             # Interfaces utilisateur dynamiques (Blade, Tailwind CSS)
+└── routes/
+    └── web.php            # Définition des points d'accès de l'application
 ```
 
-## Integrate with your tools
+---
 
-- [ ] [Set up project integrations](https://git.unicaen.fr/iut-gon-info/sae3-2025/groupetest/-/settings/integrations)
+## 🛠️ Stack Technique
 
-## Collaborate with your team
+| Couche | Technologies |
+|--------|-------------|
+| **Back-End** | PHP — Framework Laravel 11 |
+| **Front-End** | Blade Engine, Tailwind CSS, JavaScript |
+| **Base de données** | MySQL / Oracle SQL |
+| **DevOps** | Git, GitLab CI/CD |
 
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+---
 
+## 📦 Installation et Lancement Local
 
+### Prérequis
+
+- PHP 8.2+
+- Composer
+- Un serveur de base de données (MySQL/SQLite)
+
+### Démarrage rapide
+
+```bash
+# 1. Cloner le projet
+git clone https://github.com/Gorkem387/CartoRun.git
+cd CartoRun/laravel
+
+# 2. Installer les dépendances Back-End
+composer install
+
+# 3. Installer les dépendances Front-End
+npm install
+npm run dev
+
+# 4. Configurer l'environnement
+cp .env.example .env
+php artisan key:generate
+
+# 5. Configurer votre base de données dans le fichier .env, puis lancer les migrations et les données de test
+php artisan migrate --seed
+
+# 6. Lancer le serveur local
+php artisan serve
+```
+
+---
+
+## 📚 Contexte du Projet
+
+Projet majeur réalisé dans le cadre de la **SAE S3** (Situation d'Apprentissage et d'Évaluation) au **BUT Informatique** de l'IUT Grand Ouest Normandie — Campus 3 Ifs.
+
+**Compétences démontrées :**
+- Conception logicielle orientée objet et modélisation de données (UML / Conceptuel)
+- Industrialisation et travail collaboratif à 8 développeurs sous Git
+- Développement web Full-Stack sécurisé avec un framework industriel
+
+---
+
+## 🤝 Équipe de Développement
+
+**Gorkem Yildiz** — Développeur Full-Stack  
+Réalisé en collaboration avec 7 autres étudiants de la promotion.
